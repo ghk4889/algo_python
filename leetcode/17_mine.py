@@ -1,0 +1,45 @@
+# 17. Letter Combinations of a Phone Number
+
+# Given a string containing digits from 2-9 inclusive
+# return all possible letter combinations that the number could represent.
+# Return the answer in any order.
+
+# A mapping of digits to letters .(just like on the telephone buttons) is given below
+# Note that 1 does not map to any letters.
+
+phone2letter = {
+    "2": ["a", "b", "c"],
+    "3": ["d", "e", "f"],
+    "4": ["g", "h", "i"],
+    "5": ["j", "k", "l"],
+    "6": ["m", "n", "o"],
+    "7": ["p", "q", "r", "s"],
+    "8": ["t", "u", "v"],
+    "9": ["w", "x", "y", "z"]
+}
+
+# 0 <= digits.length <= 4
+# digits[i] is a digit in the range ['2', '9'].
+
+digits = ""
+# Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+
+def ff(length, output):
+    tmpoutput = []
+    if length <= 0:
+        return output
+    nowCharList = phone2letter[digits[length - 1]]
+    for nowChar in nowCharList:
+        for string in output:
+            tmpoutput.append(nowChar + string)
+    return ff(length - 1, tmpoutput)
+
+if not digits:
+    print("[]")
+else:
+    output = phone2letter[digits[-1]]
+    output = ff(len(digits)-1, output)
+    print(output)
+
+
