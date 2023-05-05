@@ -24,8 +24,11 @@ Q.append(root)
 output = 0
 while Q:
     output += 1
-    for parentNode in Q.copy():
-        Q.popleft()
+    # for parentNode in Q.copy():
+    #     Q.popleft()
+    # 아래처럼 개선
+    for _ in range(len(Q)):
+        parentNode = Q.popleft()
         if parentNode.left:
             Q.append(parentNode.left)
         if parentNode.right:
@@ -38,7 +41,7 @@ output2 = 0
 def dfs(parent: TreeNode, level):
     if not parent:
         return True
-    if dfs(parent.left, level+1) and bfs(parent.right, level+1):
+    if dfs(parent.left, level+1) and dfs(parent.right, level+1):
         global output2
         if output2 < level:
             output2 = level
